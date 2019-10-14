@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react';
+import axios from 'axios';
 
 const FileUpload = () => {
 
@@ -10,10 +11,19 @@ const FileUpload = () => {
         setFileName(e.target.files[0].name);
     }
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
         const formData = new formData();
         formData.append('file', file);
+        try {
+            const res = await axios.post('/upload', formData, {
+                headers: {
+                    'Conent-Type': 'multipart/form-data'
+                }
+            })
+        } catch(err) {
+
+        }
     }
 
     return (
