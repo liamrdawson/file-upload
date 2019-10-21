@@ -26,6 +26,7 @@ const FileUpload = () => {
             });
             const {fileName, filePath} = res.data;
             setUploadedFile({ fileName, filePath });
+            
         } catch(err) {
             if(err.response.status === 500) {
                 console.log("There's a problem with the server");
@@ -33,7 +34,6 @@ const FileUpload = () => {
                 console.log(err.response.data.msg);
             }
         }
-
     }
 
     return (
@@ -47,6 +47,13 @@ const FileUpload = () => {
                 </div>
                 <input type="submit" value="Upload" className="btn btn-primary btn-block mt-4"/>
             </form>
+            {uploadedFile ? 
+            <div className="row mt-5">
+                <div className="col-md-8 m-auto">
+                    <h2 className="text-center">{uploadedFile.fileName}</h2>
+                    <img style={{ width: '100%' }} alt="" src={uploadedFile.filePath}/>
+                </div>
+            </div> : null}
         </Fragment>
     )
 }
